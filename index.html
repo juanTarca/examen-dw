@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Juan Tarca | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio de Juan Tarca, desarrollador backend y estudiante de Ingeniería en Informática en UADE.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="theme-light">
+  <header>
+    <div class="header-wrap">
+      <a class="logo" href="index.html"><img src="img/logo.svg" alt="Logo de Juan Tarca"></a>
+      <button id="themeToggle" aria-pressed="false" aria-label="Cambiar modo oscuro">🌙</button>
+      <nav aria-label="Principal">
+        <ul class="nav">
+          <li><a href="index.html" aria-current="page">Inicio</a></li>
+          <li><a href="proyectos.html">Proyectos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="https://www.linkedin.com/in/juan-tarca/" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero">
+      <picture>
+        <source srcset="img/hero-large.jpg" media="(min-width: 769px)">
+        <source srcset="img/hero-medium.jpg" media="(min-width: 481px)">
+        <img src="img/hero-small.jpg" alt="Juan Tarca trabajando en proyectos de desarrollo backend">
+      </picture>
+      <div class="hero-text">
+        <h1>Hola, soy Juan Tarca</h1>
+        <p>Estudiante de Ingeniería en Informática en UADE y desarrollador backend en consultora.</p>
+        <a class="btn" href="proyectos.html">Ver proyectos</a>
+      </div>
+    </section>
+
+    <section class="carousel-section">
+      <h2>Proyectos destacados</h2>
+      <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li class="glide__slide"><img src="img/hero-medium.jpg" alt="Proyecto Oro Gym"></li>
+            <li class="glide__slide"><img src="img/hero-small.jpg" alt="Proyecto Sazonarte"></li>
+          </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--left" data-glide-dir="<">‹</button>
+          <button class="glide__arrow glide__arrow--right" data-glide-dir=">">›</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>© 2025 Juan Tarca</small>
+  </footer>
+
+  <script src="js/vendor/glide.min.js"></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

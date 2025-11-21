@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Blog | Juan Tarca</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+      <a class="logo" href="index.html"><img src="img/logo.svg" alt="Logo de Juan Tarca"></a>
+      <nav>
+        <ul class="nav">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="proyectos.html">Proyectos</a></li>
+          <li><a href="blog.html" aria-current="page">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Blog</h1>
+    <section class="post">
+      <h2>Aprendizajes del último proyecto</h2>
+      <p>Reflexiones sobre Oro Gym y Sazonarte.</p>
+    </section>
+
+    <section id="comentarios">
+      <h2>Comentarios</h2>
+      <div id="commentsList"></div>
+      <form id="commentForm" novalidate>
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" required minlength="2">
+        <span id="error-nombre" class="error"></span>
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" required minlength="5"></textarea>
+        <span id="error-mensaje" class="error"></span>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <small>© 2025 Juan Tarca</small>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

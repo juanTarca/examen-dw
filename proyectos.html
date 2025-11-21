@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Proyectos | Juan Tarca</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-wrap">
+      <a class="logo" href="index.html"><img src="img/logo.svg" alt="Logo de Juan Tarca"></a>
+      <nav>
+        <ul class="nav">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="proyectos.html" aria-current="page">Proyectos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Proyectos</h1>
+    <label for="filterSelect">Filtrar por tipo</label>
+    <select id="filterSelect">
+      <option value="todos">Todos</option>
+      <option value="web">Web</option>
+      <option value="backend">Backend</option>
+    </select>
+
+    <section class="grid" id="proyectosGrid"></section>
+    <div id="errorBox" role="alert" class="visually-hidden"></div>
+  </main>
+
+  <footer>
+    <small>© 2025 Juan Tarca</small>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.card {
+  background: rgba(0,0,0,0.03);
+  border-radius: var(--radius-2);
+  padding: var(--space-3);
+  position: relative;
+}
+body.theme-dark .card { background: rgba(255,255,255,0.06); }
+
+.card h3 { margin-top: 0; }
+.card img { width: 100%; border-radius: var(--radius-1); }
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-2);
+  animation: pulse 6s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(77,171,247,0); }
+  50% { box-shadow: 0 0 0 10px rgba(77,171,247,0.08); }
+}
+
+.filters { margin-bottom: var(--space-3); }
