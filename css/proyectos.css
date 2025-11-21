@@ -5,10 +5,11 @@
 }
 
 .card {
-  background: rgba(0,0,0,0.03);
+  background: #fff;
   border-radius: var(--radius-2);
   padding: var(--space-3);
   position: relative;
+  box-shadow: 0 6px 18px rgba(12,34,56,0.06);
 }
 body.theme-dark .card { background: rgba(255,255,255,0.06); }
 
@@ -29,3 +30,55 @@ body.theme-dark .card { background: rgba(255,255,255,0.06); }
 }
 
 .filters { margin-bottom: var(--space-3); }
+
+/* Proyectos page specifics */
+.proyectos-header { display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem }
+.proyectos-header h1{margin:0;font-size:1.6rem}
+
+.grid.grid-cols-2{grid-template-columns:1fr}
+
+@media (min-width:640px){
+  .grid.grid-cols-2{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:1000px){
+  .grid.grid-cols-2{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Project card refinements */
+.project-card { background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(15,23,32,0.06);overflow:hidden;display:flex;flex-direction:column }
+.project-card img{width:100%;height:160px;object-fit:cover;display:block}
+.project-meta{padding:1rem;flex:1;display:flex;flex-direction:column;gap:0.5rem}
+.project-meta h3{margin:0;font-size:1.05rem}
+.project-meta p{margin:0;color:var(--muted);line-height:1.4}
+.project-actions{display:flex;gap:0.5rem;margin-top:0.6rem}
+.project-actions .btn{padding:0.45rem 0.65rem;font-size:0.95rem}
+
+/* ensure the grid uses the spacing variable */
+.grid{gap:var(--space-3)}
+
+/* Comments UI */
+.project-comments{border-top:1px solid rgba(0,0,0,0.04);padding:0.75rem 1rem;background:var(--bg-light)}
+.comments-list{display:flex;flex-direction:column;gap:0.6rem;margin-bottom:0.6rem}
+.comment{background:rgba(0,0,0,0.02);padding:0.6rem;border-radius:8px}
+.comment .comment-meta{font-size:0.9rem;color:var(--muted);margin-bottom:0.25rem}
+.comment .comment-body{white-space:pre-wrap}
+.comment-form{display:flex;flex-direction:column;gap:0.4rem}
+.comment-form input.commenter-input,.comment-form textarea.comment-input{border:1px solid rgba(0,0,0,0.06);padding:0.5rem;border-radius:6px}
+.comment-actions{display:flex;justify-content:flex-end}
+.comment-feedback{color:var(--muted);font-size:0.9rem;min-height:1.2em}
+
+@media (max-width:640px){
+  .project-comments{padding:0.6rem}
+  .project-card img{height:180px}
+}
+
+/* hamburger menu */
+.menu-toggle{display:none;background:transparent;border:0;font-size:1.25rem;padding:0.45rem;border-radius:8px}
+.menu-toggle:focus{outline:3px solid rgba(11,117,214,0.18)}
+
+@media (max-width:640px){
+  .menu-toggle{display:inline-block}
+  #primary-nav{position:absolute;left:0;right:0;top:64px;background:var(--bg-light);padding:0.75rem 1rem;display:none;flex-direction:column;gap:0.5rem;border-bottom:1px solid rgba(0,0,0,0.04)}
+  #primary-nav.show{display:flex}
+  #primary-nav a{padding:0.6rem 0.75rem;border-radius:8px}
+}

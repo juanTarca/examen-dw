@@ -8,30 +8,36 @@
   <link rel="stylesheet" href="css/proyectos.css">
 </head>
 <body>
-  <header>
+  <header class="site-header" role="banner">
     <div class="header-wrap">
       <a class="logo" href="index.html"><img src="img/logo.svg" alt="Logo de Juan Tarca"></a>
-      <nav>
-        <ul class="nav">
+      <nav role="navigation" aria-label="Navegación principal">
+        <button id="menuToggle" class="menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menú">☰</button>
+        <ul id="primary-nav" class="nav">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="proyectos.html" aria-current="page">Proyectos</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
+      <button id="darkToggle" aria-pressed="false" class="dark-toggle">Modo oscuro</button>
     </div>
   </header>
 
-  <main>
-    <h1>Proyectos</h1>
-    <label for="filterSelect">Filtrar por tipo</label>
-    <select id="filterSelect">
-      <option value="todos">Todos</option>
-      <option value="web">Web</option>
-      <option value="backend">Backend</option>
-    </select>
+  <main class="wrap container">
+    <div class="proyectos-header">
+      <h1>Proyectos</h1>
+      <div class="filters">
+        <label for="filterSelect" class="visually-hidden">Filtrar por tipo</label>
+        <select id="filterSelect" aria-label="Filtrar proyectos">
+          <option value="todos">Todos</option>
+          <option value="web">Web</option>
+          <option value="backend">Backend</option>
+        </select>
+      </div>
+    </div>
 
-    <section class="grid" id="proyectosGrid"></section>
+    <section class="grid grid-cols-2" id="proyectosGrid" aria-live="polite"></section>
     <div id="errorBox" role="alert" class="visually-hidden"></div>
   </main>
 
