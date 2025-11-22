@@ -4,11 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const darkToggle = document.getElementById('darkToggle');
   const prefersDark = localStorage.getItem('darkMode') === 'true';
-  if (prefersDark) document.documentElement.classList.add('dark');
+  if (prefersDark) {
+    document.documentElement.classList.add('dark');
+    document.body.classList.add('theme-dark');
+  }
   if (darkToggle) {
     darkToggle.setAttribute('aria-pressed', String(prefersDark));
     darkToggle.addEventListener('click', () => {
       const isDark = document.documentElement.classList.toggle('dark');
+      document.body.classList.toggle('theme-dark');
       darkToggle.setAttribute('aria-pressed', String(isDark));
       localStorage.setItem('darkMode', String(isDark));
     });
@@ -20,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.scrollY > 10) header.classList.add('scrolled'); else header.classList.remove('scrolled');
   });
 
-  // Mobile menu (hamburger)
   const menuToggle = document.getElementById('menuToggle');
   const primaryNav = document.getElementById('primary-nav');
   if (menuToggle && primaryNav) {
@@ -30,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
       menuToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Close menu on Escape
     document.addEventListener('keydown', (ev) => {
       if (ev.key === 'Escape' && primaryNav.classList.contains('show')) {
         primaryNav.classList.remove('show');

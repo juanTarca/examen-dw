@@ -72,6 +72,13 @@ body.theme-dark .card { background: rgba(255,255,255,0.06); }
   .project-card img{height:180px}
 }
 
+/* Dark mode overrides for proyectos */
+.theme-dark .project-card{background:#0f1720;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+.theme-dark .project-meta p{color:var(--muted)}
+.theme-dark .project-comments{background:#07101a}
+.theme-dark .comment{background:rgba(255,255,255,0.03)}
+.theme-dark .project-card h3{color:var(--fg)}
+
 /* hamburger menu */
 .menu-toggle{display:none;background:transparent;border:0;font-size:1.25rem;padding:0.45rem;border-radius:8px}
 .menu-toggle:focus{outline:3px solid rgba(11,117,214,0.18)}
