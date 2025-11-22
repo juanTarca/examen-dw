@@ -1,32 +1,44 @@
-[{
-  "id": 1,
-  "title": "juantarca.com.ar",
-  "description": "Portfolio personal de Juan Tarca: proyectos, casos de estudio y contacto profesional.",
-  "img": "img/juantarca.jpg",
-  "link": "https://juantarca.com.ar"
-},
-{
-  "id": 2,
-  "title": "Gimnasio - Oro",
-  "description": "Sitio web para un gimnasio con gestión de socios, cuotas sociales y actividades. Implementación responsive y flujo de administración.",
-  "img": "img/oro-theta.jpg",
-  "link": "https://oro-theta.vercel.app/"
-},
-{
-  "id": 3,
-  "title": "Cafe5pm",
-  "description": "Sitio web para pedidos online de cafetería: menú, pedidos y contacto.",
-  "img": "img/cafe5pm.jpg",
-  "link": "https://www.cafe5pm.com.ar/"
-},
-{
-  "id": 4,
-  "title": "Sazonarte",
-  "description": "Aplicación móvil para crear y compartir recetas, participar en cursos y gestionar inscripciones. Frontend en React Native y backend en Spring Boot con autenticación JWT.",
-  "img": "img/sazonarte.jpg",
-  "link": "proyectos.html#sazonarte",
-  "details": {
-    "features": ["Crear y compartir recetas","Ingredientes escalables","Calificaciones y favoritos","Inscripción a cursos","Registro de asistencia"],
-    "tech": ["React Native","Spring Boot","API REST","JWT"]
+[
+  {
+    "id": 1,
+    "title": "juantarca.com.ar",
+    "description": "Portfolio personal de Juan Tarca: proyectos, casos de estudio y contacto profesional.",
+    "img": "img/juantarca.png",
+    "link": "https://juantarca.com.ar",
+    "category": "web"
+  },
+  {
+    "id": 2,
+    "title": "Gimnasio - Oro",
+    "description": "Sitio web para un gimnasio con gestión de socios, cuotas sociales y actividades. Implementación responsive y flujo de administración.",
+    "img": "img/oro.jpg",
+    "link": "https://oro-theta.vercel.app/",
+    "category": "fullstack"
+  },
+  {
+    "id": 3,
+    "title": "Cafe5pm",
+    "description": "Sitio web para pedidos online de cafetería: menú, pedidos y contacto.",
+    "img": "img/cafe5pm.png",
+    "link": "https://www.cafe5pm.com.ar/",
+    "category": "fullstack"
+  },
+  {
+    "id": 4,
+    "title": "Sazonarte",
+    "description": "Aplicación móvil para crear y compartir recetas, participar en cursos y gestionar inscripciones. Frontend en React Native y backend en Spring Boot con autenticación JWT.",
+    "img": "img/sazonarte.jpg",
+    "link": "proyectos.html#sazonarte",
+    "category": "fullstack",
+    "details": {
+      "features": [
+        "Crear y compartir recetas",
+        "Ingredientes escalables",
+        "Calificaciones y favoritos",
+        "Inscripción a cursos",
+        "Registro de asistencia"
+      ],
+      "tech": ["React Native", "Spring Boot", "API REST", "JWT"]
+    }
   }
-}]
+]

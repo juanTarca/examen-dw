@@ -4,11 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const darkToggle = document.getElementById('darkToggle');
   const prefersDark = localStorage.getItem('darkMode') === 'true';
-  if (prefersDark) document.documentElement.classList.add('dark');
+  if (prefersDark) {
+    document.documentElement.classList.add('dark');
+    document.body.classList.add('theme-dark');
+  }
   if (darkToggle) {
     darkToggle.setAttribute('aria-pressed', String(prefersDark));
     darkToggle.addEventListener('click', () => {
       const isDark = document.documentElement.classList.toggle('dark');
+      document.body.classList.toggle('theme-dark');
       darkToggle.setAttribute('aria-pressed', String(isDark));
       localStorage.setItem('darkMode', String(isDark));
     });
@@ -20,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.scrollY > 10) header.classList.add('scrolled'); else header.classList.remove('scrolled');
   });
 
-  // Mobile menu (hamburger)
   const menuToggle = document.getElementById('menuToggle');
   const primaryNav = document.getElementById('primary-nav');
   if (menuToggle && primaryNav) {
@@ -30,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
       menuToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Close menu on Escape
     document.addEventListener('keydown', (ev) => {
       if (ev.key === 'Escape' && primaryNav.classList.contains('show')) {
         primaryNav.classList.remove('show');
@@ -159,14 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Render projects only on the Proyectos page (container #proyectosGrid)
   const proyectosGrid = document.getElementById('proyectosGrid');
   const filterSelect = document.getElementById('filterSelect');
   let allProjects = [];
 
   async function loadProjects() {
-    if (!proyectosGrid) return; // do nothing if not on proyectos page
-    // ensure the grid has the responsive grid class (in case HTML didn't include it)
+    if (!proyectosGrid) return; 
     proyectosGrid.classList.add('grid-cols-2');
     try {
       const res = await fetch('data/posts.json');
@@ -216,12 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
           </form>
         </div>`;
 
-      // keyboard: Enter on card opens link
       card.addEventListener('keyup', (ev) => { if (ev.key === 'Enter') card.querySelector('.project-link')?.click(); });
 
       proyectosGrid.appendChild(card);
 
-      // after append, wire up comments area
       const commentsList = card.querySelector('.comments-list');
       const commentForm = card.querySelector('.comment-form');
       const feedbackEl = card.querySelector('.comment-feedback');
@@ -256,24 +254,21 @@ document.addEventListener('DOMContentLoaded', () => {
         comments.push(newComment);
         saveComments(projectId, comments);
         commentForm.reset();
-        feedbackEl.textContent = 'Comentario guardado (localmente).';
+        feedbackEl.textContent = 'Comentario publicado con éxito';
         setTimeout(() => feedbackEl.textContent = '', 2000);
         renderCommentsForProject();
       });
 
-      // initial render
       renderCommentsForProject();
     });
   }
 
-  // Filter handling (if filterSelect exists)
   if (filterSelect) {
     filterSelect.addEventListener('change', () => {
       const val = filterSelect.value;
       if (val === 'todos') renderProjects(allProjects);
       else {
         const filtered = allProjects.filter(p => {
-          // try to match by category or tech fields if present
           const cat = (p.category || '').toString().toLowerCase();
           const techs = (p.details && p.details.tech) ? p.details.tech.join(' ').toLowerCase() : '';
           return cat === val || techs.includes(val);
@@ -285,7 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadProjects();
 
-  // COMMENTS: localStorage helpers and HTML-escape helper
   function commentsKey(projectId) { return `projectComments_${projectId}`; }
   function getComments(projectId) {
     try {
