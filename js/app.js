@@ -161,14 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Render projects only on the Proyectos page (container #proyectosGrid)
   const proyectosGrid = document.getElementById('proyectosGrid');
   const filterSelect = document.getElementById('filterSelect');
   let allProjects = [];
 
   async function loadProjects() {
-    if (!proyectosGrid) return; // do nothing if not on proyectos page
-    // ensure the grid has the responsive grid class (in case HTML didn't include it)
+    if (!proyectosGrid) return; 
     proyectosGrid.classList.add('grid-cols-2');
     try {
       const res = await fetch('data/posts.json');
@@ -218,12 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
           </form>
         </div>`;
 
-      // keyboard: Enter on card opens link
       card.addEventListener('keyup', (ev) => { if (ev.key === 'Enter') card.querySelector('.project-link')?.click(); });
 
       proyectosGrid.appendChild(card);
 
-      // after append, wire up comments area
       const commentsList = card.querySelector('.comments-list');
       const commentForm = card.querySelector('.comment-form');
       const feedbackEl = card.querySelector('.comment-feedback');
@@ -258,24 +254,21 @@ document.addEventListener('DOMContentLoaded', () => {
         comments.push(newComment);
         saveComments(projectId, comments);
         commentForm.reset();
-        feedbackEl.textContent = 'Comentario guardado (localmente).';
+        feedbackEl.textContent = 'Comentario publicado con éxito';
         setTimeout(() => feedbackEl.textContent = '', 2000);
         renderCommentsForProject();
       });
 
-      // initial render
       renderCommentsForProject();
     });
   }
 
-  // Filter handling (if filterSelect exists)
   if (filterSelect) {
     filterSelect.addEventListener('change', () => {
       const val = filterSelect.value;
       if (val === 'todos') renderProjects(allProjects);
       else {
         const filtered = allProjects.filter(p => {
-          // try to match by category or tech fields if present
           const cat = (p.category || '').toString().toLowerCase();
           const techs = (p.details && p.details.tech) ? p.details.tech.join(' ').toLowerCase() : '';
           return cat === val || techs.includes(val);
@@ -287,7 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadProjects();
 
-  // COMMENTS: localStorage helpers and HTML-escape helper
   function commentsKey(projectId) { return `projectComments_${projectId}`; }
   function getComments(projectId) {
     try {

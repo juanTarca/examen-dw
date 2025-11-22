@@ -2,17 +2,24 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Juan Tarca | Portfolio</title>
+  <title>Juan Tarca | Backend Developer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/index.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css">
 </head>
-<body class="theme-light">
-  <header>
-    <div class="header-wrap">
+
+<body class="theme-light"> 
+  
+  <header class="site-header" role="banner">
+    <div class="header-wrap container">
       <a class="logo" href="index.html"><img src="img/logo.png" alt="Logo de Juan Tarca"></a>
-      <button id="themeToggle" aria-pressed="false" aria-label="Cambiar modo oscuro">🌙</button>
-      <nav aria-label="Principal">
+
+      <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+      
+      <nav id="primary-nav" aria-label="Principal" role="navigation">
         <ul class="nav">
           <li><a href="index.html" aria-current="page">Inicio</a></li>
           <li><a href="proyectos.html">Proyectos</a></li>
@@ -24,41 +31,161 @@
   </header>
 
   <main>
-    <section class="hero">
-      <picture>
-        <source srcset="img/hero-large.jpg" media="(min-width: 769px)">
-        <source srcset="img/hero-medium.jpg" media="(min-width: 481px)">
-        <img src="img/hero-small.jpg" alt="Juan Tarca trabajando en proyectos de desarrollo backend">
-      </picture>
+    <section class="hero wrap container" aria-label="Introducción">
       <div class="hero-text">
         <h1>Hola, soy Juan Tarca</h1>
-        <p>Estudiante de Ingeniería en Informática en UADE y desarrollador backend en consultora.</p>
-        <a class="btn" href="proyectos.html">Ver proyectos</a>
+        <p>Estudiante de Ingeniería en Informática en UADE y desarrollador backend en consultora. Especialista en construir servicios robustos y escalables.</p>
+        <div class="hero-actions">
+            <a class="btn primary" style="border:1px solid var(--muted); color:var(--fg);" href="proyectos.html">Ver proyectos</a>
+            <a class="btn" style="border:1px solid var(--muted); color:var(--fg);" href="contacto.html">Contáctame</a>
+        </div>
+      </div>
+      
+      <div class="hero-media">
+        <picture>
+            <img src="img/programador.png" alt="Juan Tarca programando">
+        </picture>
       </div>
     </section>
 
-    <section class="carousel-section">
-      <h2>Proyectos destacados</h2>
+    <section class="carousel-section wrap container">
+      <h2 style="margin-bottom: var(--space-3);">Proyectos destacados</h2>
+      
       <div class="glide">
         <div class="glide__track" data-glide-el="track">
           <ul class="glide__slides">
-            <li class="glide__slide"><img src="img/hero-medium.jpg" alt="Proyecto Oro Gym"></li>
-            <li class="glide__slide"><img src="img/hero-small.jpg" alt="Proyecto Sazonarte"></li>
+            <li class="glide__slide">
+                <div class="card" style="padding:0;">
+                    <img src="img/oro.jpg" alt="Proyecto Oro Gym">
+                    <div style="padding:1.5rem;">
+                        <h4>Proyecto Oro Gym</h4>
+                        <p class="small">Plataforma para gestión de gimnasios.</p>
+                        <a href="proyectos.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Ver más</a>
+                    </div>
+                </div>
+            </li>
+            <li class="glide__slide">
+                <div class="card" style="padding:0;">
+                    <img src="img/sazonarte.jpg" alt="Proyecto Sazonarte">
+                    <div style="padding:1.5rem;">
+                        <h4>Proyecto Sazonarte</h4>
+                        <p class="small">App de cursos de cocina.</p>
+                        <a href="proyectos.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Ver más</a>
+                    </div>
+                </div>
+            </li>
+             <li class="glide__slide">
+                <div class="card" style="padding:0;">
+                    <img src="img/cafe5pm.png" alt="Cafe 5pm">
+                    <div style="padding:1.5rem;">
+                        <h4>Cafe 5pm</h4>
+                        <p class="small">Sitio para pedidos de cafetería.</p>
+                        <a href="proyectos.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Ver más</a>
+                    </div>
+                </div>
+            </li>
           </ul>
         </div>
+
         <div class="glide__arrows" data-glide-el="controls">
-          <button class="glide__arrow glide__arrow--left" data-glide-dir="<">‹</button>
-          <button class="glide__arrow glide__arrow--right" data-glide-dir=">">›</button>
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<" aria-label="Anterior">
+                &#8592; 
+            </button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">" aria-label="Siguiente">
+                &#8594; 
+            </button>
         </div>
+      </div>
+    </section>
+
+    <section class="features wrap container" aria-label="Servicios">
+      <h2 style="margin-bottom: var(--space-3);">Qué hago</h2>
+      
+      <div class="features-grid">
+        
+        <article class="card feature-card">
+          <div style="font-size:2rem; margin-bottom:0.5rem;">⚙️</div>
+          <h3>Desarrollo Backend</h3>
+          <p>APIs REST, Spring Boot, Node.js, seguridad JWT y microservicios.</p>
+          <a class="btn" style="padding-left:0; color:var(--accent-2);" href="proyectos.html">Ver experiencia &rarr;</a>
+        </article>
+
+        <article class="card feature-card">
+          <div style="font-size:2rem; margin-bottom:0.5rem;">🔌</div>
+          <h3>Integración & APIs</h3>
+          <p>Conexión con pasarelas de pago y servicios de terceros.</p>
+          <a class="btn" style="padding-left:0; color:var(--accent-2);" href="contacto.html">Consultar &rarr;</a>
+        </article>
+
+        <article class="card feature-card">
+          <div style="font-size:2rem; margin-bottom:0.5rem;">💻</div>
+          <h3>Desarrollo Full‑Stack</h3>
+          <p>Interfaces funcionales con buen UX y backends robustos.</p>
+          <a class="btn" style="padding-left:0; color:var(--accent-2);" href="proyectos.html">Ver portafolio &rarr;</a>
+        </article>
+
       </div>
     </section>
   </main>
 
-  <footer>
-    <small>© 2025 Juan Tarca</small>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Juan Tarca</h3>
+          <p>Desarrollador Backend especializado en arquitecturas escalables, APIs REST y microservicios. Construyendo soluciones robustas con pasión por el código limpio.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Navegación</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="proyectos.html">Proyectos</a></li>
+            <li><a href="blog.html">Blog Personal</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Conectemos</h3>
+          <div class="social-links">
+            <a href="https://github.com/TarKic" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+              <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/juan-tarca" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="mailto:tuemail@ejemplo.com" class="social-icon" aria-label="Email">
+              <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <small>&copy; <span id="year">2025</span> Juan Tarca. Hecho con código y mucho mate.</small>
+      </div>
+    </div>
   </footer>
 
-  <script src="js/vendor/glide.min.js"></script>
+  <button id="darkToggle" class="theme-toggle-btn" aria-label="Cambiar modo oscuro">
+    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+  </button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
   <script src="js/app.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (document.querySelector('.glide')) {
+            new Glide('.glide', {
+                type: 'carousel',
+                perView: 2,
+                gap: 24,
+                peek: { before: 0, after: 0 },
+                breakpoints: {
+                    768: { perView: 1 } 
+                }
+            }).mount();
+        }
+    });
+  </script>
 </body>
 </html>
