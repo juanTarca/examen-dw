@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Proyectos | Juan Tarca</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/proyectos.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-wrap">
+      <a class="logo" href="index.html"><img src="img/logo.svg" alt="Logo de Juan Tarca"></a>
+      <nav role="navigation" aria-label="Navegación principal">
+        <button id="menuToggle" class="menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menú">☰</button>
+        <ul id="primary-nav" class="nav">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="proyectos.html" aria-current="page">Proyectos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+      <button id="darkToggle" aria-pressed="false" class="dark-toggle">Modo oscuro</button>
+    </div>
+  </header>
+
+  <main class="wrap container">
+    <div class="proyectos-header">
+      <h1>Proyectos</h1>
+      <div class="filters">
+        <label for="filterSelect" class="visually-hidden">Filtrar por tipo</label>
+        <select id="filterSelect" aria-label="Filtrar proyectos">
+          <option value="todos">Todos</option>
+          <option value="web">Web</option>
+          <option value="backend">Backend</option>
+        </select>
+      </div>
+    </div>
+
+    <section class="grid grid-cols-2" id="proyectosGrid" aria-live="polite"></section>
+    <div id="errorBox" role="alert" class="visually-hidden"></div>
+  </main>
+
+  <footer>
+    <small>© 2025 Juan Tarca</small>
+  </footer>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
