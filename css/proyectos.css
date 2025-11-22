@@ -5,13 +5,13 @@
 }
 
 .card {
-  background: #fff;
+  background: var(--card-bg);
   border-radius: var(--radius-2);
   padding: var(--space-3);
   position: relative;
-  box-shadow: 0 6px 18px rgba(12,34,56,0.06);
+  box-shadow: var(--card-shadow);
 }
-body.theme-dark .card { background: rgba(255,255,255,0.06); }
+body.theme-dark .card { background: var(--card-bg); }
 
 .card h3 { margin-top: 0; }
 .card img { width: 100%; border-radius: var(--radius-1); }
@@ -45,10 +45,25 @@ body.theme-dark .card { background: rgba(255,255,255,0.06); }
 }
 
 /* Project card refinements */
-.project-card { background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(15,23,32,0.06);overflow:hidden;display:flex;flex-direction:column }
+.project-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 220ms ease, box-shadow 260ms ease, background 300ms ease;
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+}
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-6px) scale(var(--card-hover-scale));
+  box-shadow: var(--card-shadow-hover);
+}
 .project-card img{width:100%;height:160px;object-fit:cover;display:block}
 .project-meta{padding:1rem;flex:1;display:flex;flex-direction:column;gap:0.5rem}
-.project-meta h3{margin:0;font-size:1.05rem}
+.project-meta h3{margin:0;font-size:1.05rem;color:var(--fg)}
 .project-meta p{margin:0;color:var(--muted);line-height:1.4}
 .project-actions{display:flex;gap:0.5rem;margin-top:0.6rem}
 .project-actions .btn{padding:0.45rem 0.65rem;font-size:0.95rem}
@@ -73,9 +88,9 @@ body.theme-dark .card { background: rgba(255,255,255,0.06); }
 }
 
 /* Dark mode overrides for proyectos */
-.theme-dark .project-card{background:#0f1720;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+.theme-dark .project-card{background:var(--card-bg);box-shadow:var(--card-shadow)}
 .theme-dark .project-meta p{color:var(--muted)}
-.theme-dark .project-comments{background:#07101a}
+.theme-dark .project-comments{background:var(--card-bg)}
 .theme-dark .comment{background:rgba(255,255,255,0.03)}
 .theme-dark .project-card h3{color:var(--fg)}
 
