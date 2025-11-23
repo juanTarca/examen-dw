@@ -1,69 +1,142 @@
-
-.proyectos-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: var(--space-4);
-}
-
-.proyectos-header h1 { margin: 0; font-size: 2rem; }
-
-#proyectosGrid {
+.contact-hero {
   display: grid;
-  gap: var(--space-3);
-  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  align-items: center;
 }
 
-@media (min-width: 640px) {
-  #proyectosGrid { grid-template-columns: repeat(2, 1fr); }
+.contact-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-2);
+  color: var(--fg);
 }
 
-@media (min-width: 1024px) {
-  #proyectosGrid { grid-template-columns: repeat(3, 1fr); }
-}
-
-.project-card {
-  background: var(--card-bg);
+.contact-image img {
+  width: 100%;
+  height: auto;
   border-radius: var(--radius-2);
-  border: 1px solid var(--nav-border);
   box-shadow: var(--card-shadow);
-  overflow: hidden;
+  border: 1px solid var(--nav-border);
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .contact-hero {
+    grid-template-columns: 1fr 1fr;
+  }
+  .contact-image {
+    order: 2;
+  }
+}
+
+.form-section-wrap {
+  padding: var(--space-4) 0;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+}
+
+.form-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--nav-border);
+  border-radius: var(--radius-3);
+  padding: var(--space-4);
+  box-shadow: var(--card-shadow);
+  width: 100%;
+  max-width: 700px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
+.form-card:hover {
   box-shadow: var(--card-shadow-hover);
-  border-color: var(--accent);
 }
 
-.project-card img {
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--fg);
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-bottom: 1px solid var(--nav-border);
+  padding: 0.85rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #333333;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: var(--radius-1);
+  transition: all 0.2s ease;
 }
 
-.project-meta {
-  padding: var(--space-3);
-  flex: 1;
+body.theme-dark .form-group input,
+body.theme-dark .form-group select,
+body.theme-dark .form-group textarea {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--fg);
+  border-color: var(--nav-border);
 }
 
-.project-meta h3 { margin-top: 0; color: var(--fg); }
-.project-meta p { color: var(--muted); font-size: 0.95rem; }
-
-.project-actions {
-  padding: 0 var(--space-3) var(--space-3);
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
 }
 
-.project-comments {
-  background: rgba(0,0,0,0.02);
-  border-top: 1px solid var(--nav-border);
-  padding: var(--space-2);
+body.theme-dark .form-group input:focus,
+body.theme-dark .form-group select:focus,
+body.theme-dark .form-group textarea:focus {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
-.comment-form { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
-.comment-form input, .comment-form textarea { font-size: 0.9rem; padding: 0.5rem; }
+.form-group textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.error {
+  display: block;
+  color: #e03131;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  min-height: 1.2em;
+}
+
+.feedback-message {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: var(--radius-1);
+  background-color: rgba(77, 171, 247, 0.1);
+  color: var(--fg);
+  border: 1px solid var(--accent);
+  text-align: center;
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .form-card {
+    padding: var(--space-3);
+  }
+  .form-actions {
+    flex-direction: column;
+  }
+  .form-actions .btn {
+    width: 100%;
+  }
+}
