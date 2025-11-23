@@ -3,85 +3,101 @@
 <head>
   <meta charset="utf-8">
   <title>Contacto | Juan Tarca</title>
+  <meta name="description" content="Contacta a Juan Tarca para proyectos de desarrollo backend, colaboraciones o consultas profesionales.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/contacto.css">
 </head>
+
 <body>
+  
   <header class="site-header" role="banner">
-    <div class="header-wrap">
-      <a class="logo" href="index.html"><img src="img/logo.svg" alt="Logo de Juan Tarca"></a>
-      <nav role="navigation" aria-label="Navegación principal">
+    <div class="header-wrap container">
+            <a class="logo" href="index.html"><img src="img/logo.png" alt="Logo de Juan Tarca"></a>
+
+
+      <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-label="Abrir menú">☰</button>
+
+      <nav id="primary-nav" role="navigation" aria-label="Navegación principal">
         <ul class="nav">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="proyectos.html">Proyectos</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="contacto.html" aria-current="page">Contacto</a></li>
+          <li><a href="contacto.html" aria-current="page" class="active">Contacto</a></li>
         </ul>
       </nav>
-      <button id="darkToggle" aria-pressed="false" class="dark-toggle">Modo oscuro</button>
-    </div>
+      </div>
   </header>
 
-  <main id="main" class="container" role="main">
-    <section class="hero">
-      <h1>Contacto</h1>
-      <p class="lead">¿Tenés un proyecto o consulta? Escribime y coordinamos.</p>
-      <picture>
-        <source media="(min-width:769px)" srcset="img/contacto-desktop.jpg">
-        <source media="(min-width:481px)" srcset="img/contacto-tablet.jpg">
-        <img src="img/contacto-mobile.jpg" alt="Persona trabajando en un proyecto" loading="lazy">
-      </picture>
-    </section>
-
-    <section class="form-section" aria-labelledby="contact-heading">
-      <h2 id="contact-heading" class="sr-only">Formulario de contacto</h2>
-      <form id="contactForm" novalidate aria-describedby="form-desc">
-        <p id="form-desc" class="sr-only">Formulario con validaciones HTML5 y mensajes accesibles.</p>
-
-        <label for="name">Nombre</label>
-        <input id="name" name="name" type="text" required minlength="2" aria-required="true">
-        <span id="error-name" class="error" aria-live="polite"></span>
-
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required aria-required="true">
-        <span id="error-email" class="error" aria-live="polite"></span>
-
-        <label for="motivo">Motivo</label>
-        <select id="motivo" name="motivo" required aria-required="true">
-          <option value="">Seleccioná una opción</option>
-          <option value="presupuesto">Presupuesto</option>
-          <option value="colaboracion">Colaboración</option>
-          <option value="consulta">Consulta</option>
-        </select>
-        <span id="error-motivo" class="error" aria-live="polite"></span>
-
-        <label for="detalle">Detalle</label>
-        <textarea id="detalle" name="detalle" required minlength="10" aria-required="true"></textarea>
-        <span id="error-detalle" class="error" aria-live="polite"></span>
-
-        <div class="form-actions">
-          <button type="submit" class="btn primary">Enviar</button>
-          <button type="reset" class="btn alt">Limpiar</button>
-        </div>
-      </form>
-      <div id="form-feedback" role="status" aria-live="polite" class="feedback" hidden></div>
-    </section>
-
+  <main id="main" class="container wrap" role="main">
     
+    <section class="contact-hero">
+      <div class="contact-text">
+        <h1>Contacto</h1>
+        <p class="lead text-muted">¿Tenés un proyecto en mente o una consulta técnica? Escribime y coordinamos una charla.</p>
+      </div>
+      <div class="contact-image">
+        <img src="img/contacto-ilustracion.png" alt="Ilustración de contacto y comunicación" onerror="this.src='https://via.placeholder.com/500x300?text=Contacto'">
+      </div>
+    </section>
+
+    <section class="form-section-wrap" aria-labelledby="contact-heading">
+      <div class="form-card">
+          <h2 id="contact-heading" style="margin-top:0;">Formulario de contacto</h2>
+          <p class="text-muted small" style="margin-bottom: 1.5rem;">Completá el formulario y te responderé a la brevedad.</p>
+          
+          <form id="contactForm" novalidate aria-describedby="form-desc">
+
+            <div class="form-group">
+                <label for="name">Nombre completo</label>
+                <input id="name" name="name" type="text" required minlength="2" aria-required="true" placeholder="Ej: Juan Pérez">
+                <span id="error-name" class="error" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required aria-required="true" placeholder="ejemplo@correo.com">
+                <span id="error-email" class="error" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="motivo">Motivo de consulta</label>
+                <select id="motivo" name="motivo" required aria-required="true">
+                <option value="">Seleccioná una opción...</option>
+                <option value="presupuesto">Solicitar presupuesto</option>
+                <option value="colaboracion">Propuesta de colaboración</option>
+                <option value="consulta">Consulta técnica</option>
+                <option value="otro">Otro</option>
+                </select>
+                <span id="error-motivo" class="error" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="detalle">Detalle del mensaje</label>
+                <textarea id="detalle" name="detalle" required minlength="10" aria-required="true" placeholder="Contame un poco más sobre lo que necesitás..."></textarea>
+                <span id="error-detalle" class="error" aria-live="polite"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn primary" style="flex:1;">Enviar mensaje</button>
+                <button type="reset" class="btn" style="border:1px solid var(--nav-border);">Limpiar</button>
+            </div>
+          </form>
+          
+          <div id="form-feedback" role="status" aria-live="polite" class="feedback-message" hidden></div>
+      </div>
+    </section>
 
   </main>
 
-  <footer class="site-footer">
+ <footer class="site-footer">
     <div class="container">
-      
       <div class="footer-grid">
-        
         <div class="footer-col">
           <h3>Juan Tarca</h3>
           <p>Desarrollador Backend especializado en arquitecturas escalables, APIs REST y microservicios. Construyendo soluciones robustas con pasión por el código limpio.</p>
         </div>
-
         <div class="footer-col">
           <h3>Navegación</h3>
           <ul class="footer-links">
@@ -91,33 +107,32 @@
             <li><a href="contacto.html">Contacto</a></li>
           </ul>
         </div>
-
         <div class="footer-col">
           <h3>Conectemos</h3>
           <div class="social-links">
-            <a href="https://github.com/" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+            <a href="https://github.com/TarKic" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
               <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             </a>
-            
-            <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+            <a href="https://linkedin.com/in/juan-tarca" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             </a>
-
             <a href="mailto:tuemail@ejemplo.com" class="social-icon" aria-label="Email">
               <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
             </a>
           </div>
         </div>
-
       </div>
-
       <div class="footer-bottom">
         <small>&copy; <span id="year">2025</span> Juan Tarca. Hecho con código y mucho mate.</small>
       </div>
     </div>
   </footer>
 
-  <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+  <button id="darkToggle" class="theme-toggle-btn" aria-label="Cambiar modo oscuro">
+    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+  </button>
+
   <script src="js/app.js" defer></script>
 </body>
 </html>
