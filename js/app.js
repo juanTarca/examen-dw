@@ -1,298 +1,212 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  const darkToggle = document.getElementById('darkToggle');
-  const prefersDark = localStorage.getItem('darkMode') === 'true';
-  if (prefersDark) {
-    document.documentElement.classList.add('dark');
-    document.body.classList.add('theme-dark');
-  }
-  if (darkToggle) {
-    darkToggle.setAttribute('aria-pressed', String(prefersDark));
-    darkToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.toggle('dark');
-      document.body.classList.toggle('theme-dark');
-      darkToggle.setAttribute('aria-pressed', String(isDark));
-      localStorage.setItem('darkMode', String(isDark));
-    });
-  }
-
-  const header = document.querySelector('.site-header');
-  window.addEventListener('scroll', () => {
-    if (!header) return;
-    if (window.scrollY > 10) header.classList.add('scrolled'); else header.classList.remove('scrolled');
-  });
-
-  const menuToggle = document.getElementById('menuToggle');
-  const primaryNav = document.getElementById('primary-nav');
-  if (menuToggle && primaryNav) {
-    menuToggle.addEventListener('click', (ev) => {
-      ev.stopPropagation();
-      const isOpen = primaryNav.classList.toggle('show');
-      menuToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    document.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Escape' && primaryNav.classList.contains('show')) {
-        primaryNav.classList.remove('show');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.focus();
-      }
-    });
-
-    // Close when clicking outside
-    document.addEventListener('click', (ev) => {
-      if (!primaryNav.classList.contains('show')) return;
-      const target = ev.target;
-      if (!primaryNav.contains(target) && target !== menuToggle) {
-        primaryNav.classList.remove('show');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-
-  const form = document.getElementById('contactForm');
-  const feedback = document.getElementById('form-feedback');
-  const inputs = {
-    name: document.getElementById('name'),
-    email: document.getElementById('email'),
-    motivo: document.getElementById('motivo'),
-    detalle: document.getElementById('detalle')
-  };
-
-  function showError(field, message) {
-    const el = document.getElementById('error-' + field);
-    if (el) el.textContent = message || '';
-  }
-
-  function validateAll() {
-    let ok = true;
-    if (!inputs.name.value || inputs.name.value.trim().length < 2) { showError('name','Ingrese al menos 2 caracteres'); ok = false; }
-    else showError('name','');
-    if (!inputs.email.value || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(inputs.email.value)) { showError('email','Email inválido'); ok = false; }
-    else showError('email','');
-    if (!inputs.motivo.value) { showError('motivo','Seleccioná una opción'); ok = false; }
-    else showError('motivo','');
-    if (!inputs.detalle.value || inputs.detalle.value.trim().length < 10) { showError('detalle','Ingrese al menos 10 caracteres'); ok = false; }
-    else showError('detalle','');
-    return ok;
-  }
-
-  Object.values(inputs).forEach(i => {
-    if (!i) return;
-    i.addEventListener('keyup', () => { validateAll(); saveFormData(); });
-    i.addEventListener('change', () => { validateAll(); saveFormData(); });
-  });
-
-  function saveFormData() {
-    const data = {
-      name: inputs.name?.value || '',
-      email: inputs.email?.value || '',
-      motivo: inputs.motivo?.value || '',
-      detalle: inputs.detalle?.value || ''
-    };
-    localStorage.setItem('contactFormData', JSON.stringify(data));
-  }
-
-  function restoreFormData() {
-    const raw = localStorage.getItem('contactFormData');
-    if (!raw) return;
-    try {
-      const data = JSON.parse(raw);
-      if (data.name) inputs.name.value = data.name;
-      if (data.email) inputs.email.value = data.email;
-      if (data.motivo) inputs.motivo.value = data.motivo;
-      if (data.detalle) inputs.detalle.value = data.detalle;
-    } catch(e) {  }
-  }
-  restoreFormData();
-
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const ok = validateAll();
-      if (!ok) {
-        feedback.hidden = false;
-        feedback.textContent = 'Hay errores en el formulario. Corrijalos antes de enviar.';
-        return;
-      }
-
-      feedback.hidden = false;
-      feedback.textContent = 'Enviando mensaje...';
-
-      setTimeout(() => {
-        feedback.textContent = 'Mensaje enviado correctamente. Gracias! (simulado)';
-        if (window.MicroModal) {
-          if (!document.getElementById('modal-1')) {
-            const modal = document.createElement('div');
-            modal.id = 'modal-1';
-            modal.className = 'modal micromodal-slide';
-            modal.innerHTML = `
-              <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                  <header class="modal__header">
-                    <h2 id="modal-1-title">Gracias</h2>
-                    <button class="modal__close" aria-label="Cerrar" data-micromodal-close></button>
-                  </header>
-                  <main class="modal__content" id="modal-1-content">Mensaje enviado correctamente.</main>
-                  <footer class="modal__footer">
-                    <button class="modal__btn" data-micromodal-close aria-label="Cerrar">Cerrar</button>
-                  </footer>
-                </div>
-              </div>`;
-            document.body.appendChild(modal);
-          }
-          MicroModal.init();
-          MicroModal.show('modal-1');
-        }
-
-        localStorage.removeItem('contactFormData');
-        form.reset();
-      }, 700);
-    });
-
-    form.addEventListener('reset', () => {
-      localStorage.removeItem('contactFormData');
-      setTimeout(() => { 
-        ['name','email','motivo','detalle'].forEach(k => showError(k,''));
-        feedback.hidden = true;
-      }, 50);
-    });
-  }
-
-  const proyectosGrid = document.getElementById('proyectosGrid');
-  const filterSelect = document.getElementById('filterSelect');
-  let allProjects = [];
-
-  async function loadProjects() {
-    if (!proyectosGrid) return; 
-    proyectosGrid.classList.add('grid-cols-2');
-    try {
-      const res = await fetch('data/posts.json');
-      if (!res.ok) throw new Error('Error al cargar datos');
-      const items = await res.json();
-      allProjects = items;
-      renderProjects(items);
-    } catch (err) {
-      proyectosGrid.innerHTML = `<p class="text-muted">No se pudieron cargar los proyectos.</p>`;
-      console.error(err);
-    }
-  }
-
-  function renderProjects(items) {
-    if (!proyectosGrid) return;
-    proyectosGrid.innerHTML = '';
-    if (!items || items.length === 0) {
-      proyectosGrid.innerHTML = '<p class="text-muted">No hay proyectos para mostrar.</p>';
-      return;
-    }
-    items.forEach(item => {
-      const card = document.createElement('article');
-      card.className = 'project-card';
-      card.setAttribute('tabindex','0');
-      card.dataset.projectId = item.id;
-      card.innerHTML = `
-        <a class="project-link" href="${item.link}" target="_blank" rel="noopener">
-          <img src="${item.img}" alt="${item.title}">
-        </a>
-        <div class="project-meta">
-          <h3>${item.title}</h3>
-          <p class="text-muted">${item.description}</p>
-          ${item.details ? `<p class="text-muted small">Tecnologías: ${ (item.details.tech||[]).join(', ') }</p>` : ''}
-        </div>
-        <div class="project-actions">
-          <a class="btn" href="${item.link}" target="_blank" rel="noopener">Ver</a>
-        </div>
-        <div class="project-comments" aria-live="polite">
-          <div class="comments-list" data-comments-for="${item.id}"></div>
-          <form class="comment-form" data-form-for="${item.id}" aria-label="Agregar comentario">
-            <input name="commenter" type="text" placeholder="Tu nombre" required class="commenter-input">
-            <textarea name="comment" placeholder="Escribí un comentario..." required class="comment-input"></textarea>
-            <div class="comment-actions">
-              <button type="submit" class="btn primary">Comentar</button>
-            </div>
-            <div class="comment-feedback" aria-live="polite"></div>
-          </form>
-        </div>`;
-
-      card.addEventListener('keyup', (ev) => { if (ev.key === 'Enter') card.querySelector('.project-link')?.click(); });
-
-      proyectosGrid.appendChild(card);
-
-      const commentsList = card.querySelector('.comments-list');
-      const commentForm = card.querySelector('.comment-form');
-      const feedbackEl = card.querySelector('.comment-feedback');
-      const projectId = String(item.id);
-
-      function renderCommentsForProject() {
-        const comments = getComments(projectId);
-        commentsList.innerHTML = '';
-        if (!comments || comments.length === 0) {
-          commentsList.innerHTML = '<p class="text-muted">Sé el primero en comentar.</p>';
-          return;
-        }
-        comments.forEach(c => {
-          const el = document.createElement('div');
-          el.className = 'comment';
-          el.innerHTML = `<div class="comment-meta"><strong>${escapeHtml(c.name)}</strong> · <span class="small text-muted">${new Date(c.date).toLocaleString()}</span></div><div class="comment-body">${escapeHtml(c.text)}</div>`;
-          commentsList.appendChild(el);
-        });
-      }
-
-      // handle form submit
-      commentForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = commentForm.querySelector('.commenter-input').value.trim();
-        const text = commentForm.querySelector('.comment-input').value.trim();
-        if (!name || !text) {
-          feedbackEl.textContent = 'Nombre y comentario son obligatorios.';
-          return;
-        }
-        const newComment = { name, text, date: new Date().toISOString() };
-        const comments = getComments(projectId);
-        comments.push(newComment);
-        saveComments(projectId, comments);
-        commentForm.reset();
-        feedbackEl.textContent = 'Comentario publicado con éxito';
-        setTimeout(() => feedbackEl.textContent = '', 2000);
-        renderCommentsForProject();
-      });
-
-      renderCommentsForProject();
-    });
-  }
-
-  if (filterSelect) {
-    filterSelect.addEventListener('change', () => {
-      const val = filterSelect.value;
-      if (val === 'todos') renderProjects(allProjects);
-      else {
-        const filtered = allProjects.filter(p => {
-          const cat = (p.category || '').toString().toLowerCase();
-          const techs = (p.details && p.details.tech) ? p.details.tech.join(' ').toLowerCase() : '';
-          return cat === val || techs.includes(val);
-        });
-        renderProjects(filtered);
-      }
-    });
-  }
-
-  loadProjects();
-
-  function commentsKey(projectId) { return `projectComments_${projectId}`; }
-  function getComments(projectId) {
-    try {
-      const raw = localStorage.getItem(commentsKey(projectId));
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) { return []; }
-  }
-  function saveComments(projectId, comments) {
-    try { localStorage.setItem(commentsKey(projectId), JSON.stringify(comments)); } catch(e) { console.error(e); }
-  }
-  function escapeHtml(str) {
-    return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-  }
-
+    
+    // --- 1. AÑO FOOTER ---
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   
+    // --- 2. MODO OSCURO ---
+    const darkToggle = document.getElementById('darkToggle');
+    const prefersDark = localStorage.getItem('darkMode') === 'true';
+    
+    if (prefersDark) {
+      document.body.classList.add('theme-dark');
+    }
+  
+    if (darkToggle) {
+      darkToggle.setAttribute('aria-pressed', String(prefersDark));
+      darkToggle.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('theme-dark');
+        darkToggle.setAttribute('aria-pressed', String(isDark));
+        localStorage.setItem('darkMode', String(isDark));
+      });
+    }
+  
+    // --- 3. MENÚ MÓVIL ---
+    const menuToggle = document.getElementById('menuToggle');
+    const primaryNav = document.getElementById('primary-nav');
+    
+    if (menuToggle && primaryNav) {
+      menuToggle.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        const isOpen = primaryNav.classList.toggle('show');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+  
+      document.addEventListener('click', (ev) => {
+        if (!primaryNav.classList.contains('show')) return;
+        if (!primaryNav.contains(ev.target) && ev.target !== menuToggle) {
+          primaryNav.classList.remove('show');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  
+    // --- 4. CARGA DE PROYECTOS (RECUPERADO) ---
+    const proyectosGrid = document.getElementById('proyectosGrid');
+    const filterSelect = document.getElementById('filterSelect');
+    let allProjects = [];
+
+    async function loadProjects() {
+        if (!proyectosGrid) return; // Si no estamos en la página de proyectos, salir.
+        
+        try {
+            // Intentamos cargar el JSON
+            const res = await fetch('data/posts.json');
+            if (!res.ok) throw new Error('No se pudo cargar data/posts.json');
+            
+            const items = await res.json();
+            allProjects = items;
+            renderProjects(items);
+        } catch (err) {
+            console.error(err);
+            // Fallback por si falla la carga del JSON
+            proyectosGrid.innerHTML = `
+                <div class="error-msg" style="grid-column: 1/-1; text-align: center;">
+                    <p>No se pudieron cargar los proyectos automáticos.</p>
+                </div>`;
+        }
+    }
+
+    function renderProjects(items) {
+        if (!proyectosGrid) return;
+        proyectosGrid.innerHTML = '';
+        
+        if (!items || items.length === 0) {
+            proyectosGrid.innerHTML = '<p class="text-muted">No hay proyectos para mostrar.</p>';
+            return;
+        }
+
+        items.forEach(item => {
+            const card = document.createElement('article');
+            card.className = 'project-card';
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.title}" loading="lazy">
+                <div class="project-meta">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    ${item.details && item.details.tech ? `<p class="text-muted small" style="margin-top:0.5rem"><strong>Tecnologías:</strong> ${item.details.tech.join(', ')}</p>` : ''}
+                </div>
+                <div class="project-actions">
+                    <a class="btn primary" href="${item.link}" target="_blank" rel="noopener">Ver Proyecto</a>
+                </div>
+            `;
+            proyectosGrid.appendChild(card);
+        });
+    }
+
+    // Filtro de proyectos
+    if (filterSelect) {
+        filterSelect.addEventListener('change', () => {
+            const val = filterSelect.value;
+            if (val === 'todos') {
+                renderProjects(allProjects);
+            } else {
+                const filtered = allProjects.filter(p => {
+                    const cat = (p.category || '').toLowerCase();
+                    // Buscamos coincidencia en categoría o tecnologías
+                    const techMatch = p.details && p.details.tech && p.details.tech.some(t => t.toLowerCase().includes(val));
+                    return cat === val || techMatch;
+                });
+                renderProjects(filtered);
+            }
+        });
+    }
+
+    // Ejecutar carga de proyectos
+    loadProjects();
+
+
+    // --- 5. LÓGICA DEL BLOG (MODAL) ---
+    const modal = document.getElementById('blogModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const readMoreBtns = document.querySelectorAll('.read-more');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDate = document.getElementById('modalDate');
+    const modalBody = document.getElementById('modalBody');
+    const modalImage = document.getElementById('modalImage');
+    const modalImageContainer = document.getElementById('modalImageContainer');
+  
+    if (modal && readMoreBtns.length > 0) {
+        readMoreBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const title = btn.getAttribute('data-title');
+                const date = btn.getAttribute('data-date');
+                const content = btn.getAttribute('data-content');
+                const imgSrc = btn.getAttribute('data-img');
+    
+                if(modalTitle) modalTitle.textContent = title;
+                if(modalDate) modalDate.textContent = date;
+                if(modalBody) modalBody.innerHTML = content;
+    
+                if (imgSrc && imgSrc !== "") {
+                    if(modalImage) modalImage.src = imgSrc;
+                    if(modalImageContainer) modalImageContainer.style.display = 'block';
+                } else {
+                    if(modalImageContainer) modalImageContainer.style.display = 'none';
+                }
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+  
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
+    }
+
+    // --- 6. COMENTARIOS BLOG ---
+    const commentForm = document.getElementById('commentForm');
+    const commentsList = document.getElementById('commentsList');
+
+    if (commentForm && commentsList) {
+        loadComments();
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const mensaje = document.getElementById('mensaje').value;
+            const date = new Date().toLocaleDateString();
+            if(nombre && mensaje) {
+                const newComment = { nombre, mensaje, date };
+                saveComment(newComment);
+                renderComment(newComment);
+                commentForm.reset();
+            }
+        });
+
+        function saveComment(comment) {
+            let comments = JSON.parse(localStorage.getItem('blogComments')) || [];
+            comments.push(comment);
+            localStorage.setItem('blogComments', JSON.stringify(comments));
+        }
+
+        function loadComments() {
+            let comments = JSON.parse(localStorage.getItem('blogComments')) || [];
+            comments.forEach(renderComment);
+        }
+
+        function renderComment(comment) {
+            const div = document.createElement('div');
+            div.className = 'comment';
+            div.innerHTML = `<div class="comment-meta"><strong>${comment.nombre}</strong> <span style="font-size:0.8rem; color:var(--muted)">${comment.date}</span></div><div class="comment-body">${comment.mensaje}</div>`;
+            commentsList.appendChild(div);
+        }
+    }
+    
+    // --- 7. CAROUSEL GLIDE (Inicio) ---
+    if (document.querySelector('.glide')) {
+        if (typeof Glide !== 'undefined') {
+            new Glide('.glide', {
+                type: 'carousel',
+                perView: 2,
+                gap: 24,
+                peek: { before: 0, after: 0 },
+                breakpoints: { 768: { perView: 1 } }
+            }).mount();
+        }
+    }
 });
