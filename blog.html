@@ -8,10 +8,12 @@
   <link rel="stylesheet" href="css/blog.css">
 </head>
 <body>
-  <header>
-    <div class="header-wrap">
-      <a class="logo" href="index.html"><img src="img/logo.svg" alt="Logo de Juan Tarca"></a>
-      <nav>
+  
+  <header class="site-header" role="banner">
+    <div class="header-wrap container">
+      <a class="logo" href="index.html"><img src="img/logo.png" alt="Logo"></a>
+      <button id="menuToggle" class="menu-toggle" aria-label="Abrir menú">☰</button>
+      <nav id="primary-nav" role="navigation">
         <ul class="nav">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="proyectos.html">Proyectos</a></li>
@@ -22,74 +24,114 @@
     </div>
   </header>
 
-  <main>
-    <h1>Blog</h1>
-    <section class="post">
-      <h2>Aprendizajes del último proyecto</h2>
-      <p>Reflexiones sobre Oro Gym y Sazonarte.</p>
+  <main class="wrap container">
+    <section class="blog-header">
+      <h1>Mi Blog</h1>
+      <p class="text-muted lead">Reflexiones, aprendizajes y tutoriales sobre desarrollo backend.</p>
     </section>
 
-    <section id="comentarios">
-      <h2>Comentarios</h2>
-      <div id="commentsList"></div>
-      <form id="commentForm" novalidate>
-        <label for="nombre">Nombre</label>
-        <input id="nombre" name="nombre" type="text" required minlength="2">
-        <span id="error-nombre" class="error"></span>
+    <section class="blog-grid">
+      
+      <article class="blog-card featured">
+        <div class="card-image">
+           <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Código Backend">
+        </div>
+        <div class="card-content">
+          <span class="tag">Arquitectura</span>
+          <h2>Aprendizajes del proyecto Oro Gym</h2>
+          <p class="excerpt">Cómo diseñé la arquitectura de microservicios para escalar la gestión de usuarios.</p>
+          <div class="card-footer">
+            <span class="date">23 Nov 2025</span>
+            <button class="btn-link read-more" 
+                data-title="Aprendizajes del proyecto Oro Gym" 
+                data-date="23 Nov 2025"
+                data-img="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+                data-content="En este proyecto aprendí la importancia de separar la lógica de negocio de la capa de presentación. <br><br>Utilicé Node.js con Express para crear una API RESTful que se comunica con una base de datos MongoDB. Uno de los mayores desafíos fue manejar la autenticación con JWT y asegurar que los datos de los usuarios estuvieran protegidos.<br><br>También implementé WebSockets para notificaciones en tiempo real, lo que mejoró drásticamente la experiencia de usuario en la gestión de turnos del gimnasio.">
+                Leer artículo &rarr;
+            </button>
+          </div>
+        </div>
+      </article>
 
-        <label for="mensaje">Mensaje</label>
-        <textarea id="mensaje" name="mensaje" required minlength="5"></textarea>
-        <span id="error-mensaje" class="error"></span>
+      <article class="blog-card">
+        <div class="card-content">
+          <span class="tag">Tutorial</span>
+          <h3>Integrando MercadoPago</h3>
+          <p class="excerpt">Guía paso a paso para procesar pagos seguros usando Webhooks.</p>
+          <div class="card-footer">
+            <span class="date">15 Oct 2025</span>
+            <button class="btn-link read-more" 
+                data-title="Integrando MercadoPago con Node.js" 
+                data-date="15 Oct 2025"
+                data-img=""
+                data-content="La integración de pasarelas de pago es crucial. En este tutorial explico cómo configurar las credenciales de prueba, crear la preferencia de pago y, lo más importante, cómo escuchar los Webhooks.<br><br>Los Webhooks son esenciales para confirmar que el pago realmente se acreditó en el backend de manera asíncrona, evitando fraudes si el usuario cierra el navegador antes de tiempo.">
+                Leer más &rarr;
+            </button>
+          </div>
+        </div>
+      </article>
 
-        <button type="submit">Enviar</button>
-      </form>
+      <article class="blog-card">
+        <div class="card-content">
+          <span class="tag">Carrera</span>
+          <h3>Mi experiencia en la consultora</h3>
+          <p class="excerpt">Balance entre estudiar Ingeniería y trabajar como desarrollador.</p>
+          <div class="card-footer">
+            <span class="date">02 Sep 2025</span>
+            <button class="btn-link read-more" 
+                data-title="Mi experiencia en la consultora" 
+                data-date="02 Sep 2025"
+                data-img=""
+                data-content="Trabajar mientras estudio es un desafío enorme, pero vale la pena. En la consultora aprendí a trabajar con metodologías ágiles (Scrum), a usar Git en equipos grandes y a entender que el código limpio es más importante que el código inteligente.<br><br>Lo más valioso ha sido el code review: recibir feedback de seniors me ha hecho crecer exponencialmente.">
+                Leer más &rarr;
+            </button>
+          </div>
+        </div>
+      </article>
+
     </section>
+
+    <section id="comentarios" class="comments-section">
+        <div class="form-card">
+          <h2>Dejá tu comentario</h2>
+          <div id="commentsList" class="comments-list"></div>
+          <form id="commentForm" class="comment-form">
+            <div class="form-group">
+                <input id="nombre" name="nombre" type="text" required placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+                <textarea id="mensaje" name="mensaje" required placeholder="Escribí tu comentario..."></textarea>
+            </div>
+            <button type="submit" class="btn primary">Comentar</button>
+          </form>
+        </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      
-      <div class="footer-grid">
-        
-        <div class="footer-col">
-          <h3>Juan Tarca</h3>
-          <p>Desarrollador Backend especializado en arquitecturas escalables, APIs REST y microservicios. Construyendo soluciones robustas con pasión por el código limpio.</p>
-        </div>
-
-        <div class="footer-col">
-          <h3>Navegación</h3>
-          <ul class="footer-links">
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="proyectos.html">Proyectos</a></li>
-            <li><a href="blog.html">Blog Personal</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h3>Conectemos</h3>
-          <div class="social-links">
-            <a href="https://github.com/" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
-              <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            </a>
-            
-            <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-
-            <a href="mailto:tuemail@ejemplo.com" class="social-icon" aria-label="Email">
-              <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="footer-bottom">
-        <small>&copy; <span id="year">2025</span> Juan Tarca. Hecho con código y mucho mate.</small>
-      </div>
-    </div>
+    <div class="container"><small>© 2025 Juan Tarca</small></div>
   </footer>
+
+  <div id="blogModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-content">
+        <button id="closeModal" class="modal-close" aria-label="Cerrar">&times;</button>
+        
+        <div class="modal-header">
+            <span id="modalDate" class="tag">Fecha</span>
+            <h2 id="modalTitle">Título del Artículo</h2>
+        </div>
+        
+        <div id="modalImageContainer" class="modal-img-wrap" style="display:none;">
+            <img id="modalImage" src="" alt="">
+        </div>
+
+        <div id="modalBody" class="modal-body">
+            </div>
+    </div>
+  </div>
+
+  <button id="darkToggle" class="theme-toggle-btn"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
 
   <script src="js/app.js" defer></script>
 </body>
