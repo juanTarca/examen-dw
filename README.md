@@ -4,6 +4,10 @@ Desarrollo de sitio web para el final libre de Desarrollo Web. El mismo simula m
 
 Para el manejo de versiones, fui creando distintas ramas o branches y en GitHub Pages solamente se ve lo que tengo en la rama main. Esto me permite evitar que esté en producción un cambio que aún no sé si funciona 100%. Una vez que se hizo el test correspondiente con la rama, se pide una Pull Request; allí (en caso de que tenga un equipo de más de una persona), se puede requerir aprobación para que se mergee (mergee hace referencia a Merge, en inglés, que es cuando una rama se mezcla con la otra) y recién ahí pasan a producción los cambios
 
+
+## Enlace de GitHub pages
+https://juantarca.github.io/examen-dw/
+
 ## Despliegue del sitio
 
 ### Cómo obtener un dominio (Teoría)
