@@ -37,14 +37,12 @@
 
 .carousel-section { 
   margin-top: var(--space-4); 
-  position: relative; /* Necesario para posicionar flechas */
+  position: relative;
   padding-bottom: var(--space-4);
 }
 
-/* Estilos de las Tarjetas (Cards) - Mejorados para Modo Claro */
-.card {
+¡.card {
   background-color: var(--card-bg);
-  /* Borde sutil: clave para que se vea bien en fondo blanco */
   border: 1px solid rgba(0,0,0,0.08); 
   border-radius: var(--radius-2);
   padding: var(--space-3);
@@ -56,9 +54,8 @@
   overflow: hidden;
 }
 
-/* Ajuste específico para modo oscuro */
 body.theme-dark .card {
-  border: 1px solid var(--nav-border); /* Borde más oscuro en dark mode */
+  border: 1px solid var(--nav-border); 
 }
 
 .card:hover {
@@ -70,24 +67,22 @@ body.theme-dark .card {
 .card h3, .card h4 { margin-top: 0.5rem; margin-bottom: 0.5rem; color: var(--fg); }
 .card p { flex-grow: 1; margin-bottom: 1rem; color: var(--muted); }
 
-/* Imágenes dentro de las cards del carrusel */
 .glide__slide img { 
   width: 100%; 
-  height: 220px; /* Altura fija para uniformidad */
+  height: 220px; 
   object-fit: cover; 
   display: block;
   border-bottom: 1px solid var(--nav-border);
   border-radius: var(--radius-2) var(--radius-2) 0 0;
 }
 
-/* --- FLECHAS DEL CARRUSEL (ARROWS) --- */
 .glide__arrows {
   position: absolute;
   top: 50%;
   left: 0;
   right: 0;
-  transform: translateY(-50%); /* Centrado vertical exacto */
-  pointer-events: none; /* Permite clicar a través del contenedor */
+  transform: translateY(-50%); 
+  pointer-events: none; 
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -95,7 +90,7 @@ body.theme-dark .card {
 }
 
 .glide__arrow {
-  pointer-events: auto; /* Reactiva el clic en el botón */
+  pointer-events: auto; 
   background-color: var(--card-bg);
   border: 1px solid rgba(0,0,0,0.1);
   color: var(--accent);
@@ -110,11 +105,9 @@ body.theme-dark .card {
   transition: all 0.2s ease;
   font-size: 1.2rem;
   line-height: 1;
-  /* Desplazamiento lateral para que no tapen el contenido */
   transform: scale(1);
 }
 
-/* En pantallas grandes, sacamos las flechas un poco hacia afuera */
 @media (min-width: 1100px) {
   .glide__arrow--left { margin-left: -20px; }
   .glide__arrow--right { margin-right: -20px; }
