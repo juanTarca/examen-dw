@@ -1,3 +1,55 @@
+.projects-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 769px) {
+  .projects-layout {
+      grid-template-columns: 250px 1fr;
+      align-items: start;
+  }
+}
+
+.filters-sidebar {
+  background: var(--card-bg);
+  padding: var(--space-3);
+  border-radius: var(--radius-2);
+  border: 1px solid var(--nav-border);
+  position: sticky;
+  top: 90px; 
+}
+
+.filters-sidebar h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: var(--fg);
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--nav-border);
+  border-radius: var(--radius-1);
+  background: var(--bg-light);
+  color: var(--fg);
+  font-size: 0.95rem;
+}
+
+.tag-small {
+  font-size: 0.75rem;
+  background: rgba(0,0,0,0.05);
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: var(--muted);
+  border: 1px solid var(--nav-border);
+}
+
+body.theme-dark .tag-small {
+  background: rgba(255,255,255,0.05);
+  color: var(--fg-dark);
+}
 
 .proyectos-header {
   display: flex;
@@ -7,9 +59,9 @@
   margin-bottom: var(--space-4);
 }
 
-.proyectos-header h1 { margin: 0; font-size: 2rem; }
+.proyectos-header h1 { margin: 0; font-size: 2rem; color: var(--fg); }
+.proyectos-header p { margin: 0; }
 
-/* Grid de Proyectos */
 #proyectosGrid {
   display: grid;
   gap: var(--space-3);
@@ -20,11 +72,10 @@
   #proyectosGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1100px) {
   #proyectosGrid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Tarjeta de Proyecto (Estilo específico) */
 .project-card {
   background: var(--card-bg);
   border-radius: var(--radius-2);
@@ -47,26 +98,25 @@
   height: 180px;
   object-fit: cover;
   border-bottom: 1px solid var(--nav-border);
+  background-color: #f0f0f0;
 }
 
 .project-meta {
   padding: var(--space-3);
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.project-meta h3 { margin-top: 0; color: var(--fg); }
-.project-meta p { color: var(--muted); font-size: 0.95rem; }
+.project-meta h3 { margin: 0; color: var(--fg); font-size: 1.2rem;}
+.project-meta p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
 
 .project-actions {
   padding: 0 var(--space-3) var(--space-3);
 }
 
-/* Comentarios dentro de la tarjeta */
-.project-comments {
-  background: rgba(0,0,0,0.02);
-  border-top: 1px solid var(--nav-border);
-  padding: var(--space-2);
+.project-actions .btn {
+  width: 100%;
+  text-align: center;
 }
-
-.comment-form { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
-.comment-form input, .comment-form textarea { font-size: 0.9rem; padding: 0.5rem; }

@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. AÑO FOOTER ---
+   
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
   
-    // --- 2. MODO OSCURO ---
     const darkToggle = document.getElementById('darkToggle');
     const prefersDark = localStorage.getItem('darkMode') === 'true';
     
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   
-    // --- 3. MENÚ MÓVIL ---
     const menuToggle = document.getElementById('menuToggle');
     const primaryNav = document.getElementById('primary-nav');
     
@@ -41,16 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   
-    // --- 4. CARGA DE PROYECTOS (RECUPERADO) ---
     const proyectosGrid = document.getElementById('proyectosGrid');
     const filterSelect = document.getElementById('filterSelect');
     let allProjects = [];
 
     async function loadProjects() {
-        if (!proyectosGrid) return; // Si no estamos en la página de proyectos, salir.
+        if (!proyectosGrid) return; 
         
         try {
-            // Intentamos cargar el JSON
             const res = await fetch('data/posts.json');
             if (!res.ok) throw new Error('No se pudo cargar data/posts.json');
             
@@ -59,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderProjects(items);
         } catch (err) {
             console.error(err);
-            // Fallback por si falla la carga del JSON
             proyectosGrid.innerHTML = `
                 <div class="error-msg" style="grid-column: 1/-1; text-align: center;">
                     <p>No se pudieron cargar los proyectos automáticos.</p>
@@ -94,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Filtro de proyectos
     if (filterSelect) {
         filterSelect.addEventListener('change', () => {
             const val = filterSelect.value;
@@ -103,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 const filtered = allProjects.filter(p => {
                     const cat = (p.category || '').toLowerCase();
-                    // Buscamos coincidencia en categoría o tecnologías
                     const techMatch = p.details && p.details.tech && p.details.tech.some(t => t.toLowerCase().includes(val));
                     return cat === val || techMatch;
                 });
@@ -112,11 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Ejecutar carga de proyectos
     loadProjects();
 
 
-    // --- 5. LÓGICA DEL BLOG (MODAL) ---
     const modal = document.getElementById('blogModal');
     const closeModalBtn = document.getElementById('closeModal');
     const readMoreBtns = document.querySelectorAll('.read-more');
@@ -159,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
     }
 
-    // --- 6. COMENTARIOS BLOG ---
     const commentForm = document.getElementById('commentForm');
     const commentsList = document.getElementById('commentsList');
 
@@ -197,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // --- 7. CAROUSEL GLIDE (Inicio) ---
     if (document.querySelector('.glide')) {
         if (typeof Glide !== 'undefined') {
             new Glide('.glide', {
